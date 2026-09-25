@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Rina Foods | Wholesale Sweets & Snacks</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background: #f7f3ec;
+      color: #241d18;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ================= NAVBAR ================= */
+
+    nav {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 20;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding: 25px 7%;
+      color: white;
+    }
+
+    .logo {
+      font-family: "Playfair Display", serif;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 35px;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      opacity: 0.9;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+    }
+
+    .nav-button {
+      background: #f4c46c;
+      color: #241d18;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-weight: 700;
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      min-height: 720px;
+      padding: 150px 7% 100px;
+
+      display: flex;
+      align-items: center;
+
+      position: relative;
+      overflow: hidden;
+
+      background:
+        linear-gradient(90deg, rgba(29,22,17,0.94) 0%, rgba(29,22,17,0.72) 45%, rgba(29,22,17,0.20) 100%),
+        url("assets/images/hero.jpg");
+
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-content {
+      max-width: 650px;
+      color: white;
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      color: #f4c46c;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(48px, 7vw, 86px);
+      line-height: 0.98;
+      letter-spacing: -3px;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 span {
+      color: #f4c46c;
+    }
+
+    .hero p {
+      max-width: 540px;
+      font-size: 17px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 35px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .primary-btn {
+      background: #f4c46c;
+      color: #241d18;
+      padding: 16px 25px;
+      border-radius: 40px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: 0.3s;
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .secondary-btn {
+      border: 1px solid rgba(255,255,255,0.45);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 40px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .secondary-btn:hover {
+      background: white;
+      color: #241d18;
+    }
+
+    /* ================= FLOATING INFO ================= */
+
+    .hero-card {
+      position: absolute;
+      right: 7%;
+      bottom: 60px;
+
+      width: 260px;
+      padding: 22px;
+
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      backdrop-filter: blur(15px);
+
+      border-radius: 20px;
+      color: white;
+    }
+
+    .hero-card small {
+      color: #f4c46c;
+      font-weight: 700;
+    }
+
+    .hero-card h3 {
+      margin: 8px 0;
+      font-family: "Playfair Display", serif;
+      font-size: 24px;
+    }
+
+    .hero-card p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* ================= INTRO ================= */
+
+    .intro {
+      padding: 110px 7%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .section-label {
+      color: #9c6330;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .intro h2 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(38px, 5vw, 60px);
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .intro p {
+      color: #6c625a;
+      line-height: 1.8;
+      max-width: 520px;
+    }
+
+    .intro-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .stat {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      border: 1px solid #e9dfd2;
+    }
+
+    .stat strong {
+      display: block;
+      font-family: "Playfair Display", serif;
+      font-size: 38px;
+      color: #8b5427;
+      margin-bottom: 5px;
+    }
+
+    .stat span {
+      color: #766c64;
+      font-size: 14px;
+    }
+
+    /* ================= CATEGORIES ================= */
+
+    .categories {
+      padding: 100px 7%;
+      background: #eee6da;
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 55px;
+    }
+
+    .section-heading h2 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(38px, 5vw, 58px);
+      margin-bottom: 15px;
+    }
+
+    .section-heading p {
+      color: #71675f;
+      line-height: 1.7;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .category {
+      min-height: 300px;
+      padding: 25px;
+
+      border-radius: 24px;
+      overflow: hidden;
+
+      position: relative;
+
+      display: flex;
+      align-items: flex-end;
+
+      color: white;
+
+      background-size: cover;
+      background-position: center;
+
+      transition: 0.4s;
+    }
+
+    .category:hover {
+      transform: translateY(-8px);
+    }
+
+    .category::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent 25%, rgba(0,0,0,0.8));
+    }
+
+    .category-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .category h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 27px;
+      margin-bottom: 5px;
+    }
+
+    .category p {
+      font-size: 13px;
+      opacity: 0.85;
+    }
+
+    .cat-1 {
+      background-image: url("assets/images/laddoo.jpg");
+    }
+
+    .cat-2 {
+      background-image: url("assets/images/jalebi.jpg");
+    }
+
+    .cat-3 {
+      background-image: url("assets/images/mixture.jpg");
+    }
+
+    .cat-4 {
+      background-image: url("assets/images/snacks.jpg");
+    }
+
+    /* ================= WHOLESALE ================= */
+
+    .wholesale {
+      padding: 110px 7%;
+    }
+
+    .wholesale-box {
+      background: #2d2119;
+      border-radius: 30px;
+      padding: 70px;
+
+      color: white;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wholesale-box::before {
+      content: "";
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      background: rgba(244,196,108,0.08);
+
+      position: absolute;
+      right: -100px;
+      top: -100px;
+    }
+
+    .wholesale h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 52px;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .wholesale p {
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+    }
+
+    .benefits {
+      display: grid;
+      gap: 18px;
+    }
+
+    .benefit {
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+    }
+
+    .check {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #f4c46c;
+      color: #241d18;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .benefit h4 {
+      margin-bottom: 5px;
+    }
+
+    .benefit p {
+      font-size: 13px;
+    }
+
+    /* ================= CTA ================= */
+
+    .cta {
+      padding: 100px 7%;
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(42px, 6vw, 70px);
+      margin-bottom: 20px;
+    }
+
+    .cta p {
+      max-width: 600px;
+      margin: 0 auto 30px;
+      color: #71675f;
+      line-height: 1.7;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      background: #1d1611;
+      color: white;
+      padding: 60px 7% 30px;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+      padding-bottom: 45px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .footer-logo {
+      font-family: "Playfair Display", serif;
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .footer-text {
+      color: rgba(255,255,255,0.55);
+      max-width: 350px;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .copyright {
+      padding-top: 25px;
+      color: rgba(255,255,255,0.4);
+      font-size: 12px;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 900px) {
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: 700px;
+        padding-top: 130px;
+      }
+
+      .hero-card {
+        display: none;
+      }
+
+      .intro {
+        grid-template-columns: 1fr;
+      }
+
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .wholesale-box {
+        grid-template-columns: 1fr;
+        padding: 45px 30px;
+      }
+
+      .footer-top {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 550px) {
+
+      nav {
+        padding: 20px;
+      }
+
+      .logo {
+        font-size: 24px;
+      }
+
+      .nav-button {
+        padding: 10px 15px;
+        font-size: 12px;
+      }
+
+      .hero {
+        padding: 120px 20px 70px;
+        min-height: 680px;
+      }
+
+      .hero h1 {
+        letter-spacing: -2px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .intro,
+      .categories,
+      .wholesale,
+      .cta {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .intro {
+        padding-top: 75px;
+        padding-bottom: 75px;
+        gap: 40px;
+      }
+
+      .intro-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stat {
+        padding: 20px;
+      }
+
+      .stat strong {
+        font-size: 30px;
+      }
+
+      .category-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .category {
+        min-height: 250px;
+      }
+
+      .wholesale-box {
+        border-radius: 20px;
+      }
+
+      .wholesale h2 {
+        font-size: 40px;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= NAVBAR ================= -->
+
+  <nav>
+
+    <a href="index.html" class="logo">
+      Rina Foods
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <a href="order.html" class="nav-button">
+      Wholesale Order
+    </a>
+
+  </nav>
+
+
+  <!-- ================= HERO ================= -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="eyebrow">
+        Wholesale Sweets & Snacks
+      </div>
+
+      <h1>
+        Your shop's
+        <span>sweet</span>
+        supply partner.
+      </h1>
+
+      <p>
+        Traditional Indian sweets, snacks and bakery favourites
+        supplied in wholesale quantities for shops, supermarkets,
+        cafés and retailers.
+      </p>
+
+      <div class="hero-buttons">
+
+        <a href="products.html" class="primary-btn">
+          Explore Products →
+        </a>
+
+        <a href="order.html" class="secondary-btn">
+          Place Wholesale Enquiry
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="hero-card">
+
+      <small>FOR RETAILERS</small>
+
+      <h3>
+        Built for wholesale.
+      </h3>
+
+      <p>
+        Easy ordering, bulk quantities and reliable supply
+        for your business.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= INTRO ================= -->
+
+  <section class="intro">
+
+    <div>
+
+      <div class="section-label">
+        Who we serve
+      </div>
+
+      <h2>
+        Made for businesses that sell good food.
+      </h2>
+
+      <p>
+        We supply carefully prepared sweets and snacks to
+        retailers looking for dependable products and
+        consistent wholesale supply.
+      </p>
+
+    </div>
+
+
+    <div class="intro-stats">
+
+      <div class="stat">
+        <strong>20+</strong>
+        <span>Product varieties</span>
+      </div>
+
+      <div class="stat">
+        <strong>B2B</strong>
+        <span>Wholesale focused</span>
+      </div>
+
+      <div class="stat">
+        <strong>Bulk</strong>
+        <span>Retail quantities</span>
+      </div>
+
+      <div class="stat">
+        <strong>Fresh</strong>
+        <span>Prepared with care</span>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= CATEGORIES ================= -->
+
+  <section class="categories">
+
+    <div class="section-heading">
+
+      <div class="section-label">
+        Our range
+      </div>
+
+      <h2>
+        Something for every shop.
+      </h2>
+
+      <p>
+        Explore our collection of traditional sweets,
+        savoury snacks and popular bakery products.
+      </p>
+
+    </div>
+
+
+    <div class="category-grid">
+
+      <a href="products.html#sweets" class="category cat-1">
+
+        <div class="category-content">
+
+          <h3>Traditional Sweets</h3>
+
+          <p>
+            Laddoo, halwa & more
+          </p>
+
+        </div>
+
+      </a>
+
+
+      <a href="products.html#jalebi" class="category cat-2">
+
+        <div class="category-content">
+
+          <h3>Jalebi & Classics</h3>
+
+          <p>
+            Fresh traditional favourites
+          </p>
+
+        </div>
+
+      </a>
+
+
+      <a href="products.html#mixture" class="category cat-3">
+
+        <div class="category-content">
+
+          <h3>Mixtures</h3>
+
+          <p>
+            Crunchy & savoury
+          </p>
+
+        </div>
+
+      </a>
+
+
+      <a href="products.html#snacks" class="category cat-4">
+
+        <div class="category-content">
+
+          <h3>Snacks</h3>
+
+          <p>
+            Popular tea-time choices
+          </p>
+
+        </div>
+
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= WHOLESALE ================= -->
+
+  <section class="wholesale">
+
+    <div class="wholesale-box">
+
+      <div>
+
+        <div class="section-label">
+          Wholesale made simple
+        </div>
+
+        <h2>
+          More products.
+          Less hassle.
+        </h2>
+
+        <p>
+          Tell us what your shop needs and we'll help you
+          with products, quantities and wholesale orders.
+        </p>
+
+      </div>
+
+
+      <div class="benefits">
+
+        <div class="benefit">
+
+          <div class="check">✓</div>
+
+          <div>
+            <h4>Bulk quantities</h4>
+            <p>
+              Designed specifically for retailers and shops.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="benefit">
+
+          <div class="check">✓</div>
+
+          <div>
+            <h4>Simple ordering</h4>
+            <p>
+              Browse products and send your wholesale enquiry.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="benefit">
+
+          <div class="check">✓</div>
+
+          <div>
+            <h4>Wide product range</h4>
+            <p>
+              Sweets, mixtures, snacks and more in one place.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="benefit">
+
+          <div class="check">✓</div>
+
+          <div>
+            <h4>Business focused</h4>
+            <p>
+              Created for shops, retailers and resellers.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= CTA ================= -->
+
+  <section class="cta">
+
+    <div class="section-label">
+      Start your order
+    </div>
+
+    <h2>
+      Ready to stock your shop?
+    </h2>
+
+    <p>
+      Browse our products and send us your wholesale
+      requirement. We'll get back to you with the details.
+    </p>
+
+    <a href="order.html" class="primary-btn">
+      Start Wholesale Order →
+    </a>
+
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer>
+
+    <div class="footer-top">
+
+      <div>
+
+        <div class="footer-logo">
+          Rina Foods
+        </div>
+
+        <p class="footer-text">
+          Wholesale sweets, snacks and traditional Indian
+          favourites for retailers and businesses.
+        </p>
+
+      </div>
+
+
+      <div class="footer-links">
+
+        <a href="products.html">Products</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="order.html">Wholesale Order</a>
+
+      </div>
+
+    </div>
+
+
+    <div class="copyright">
+      © 2026 Rina Foods. All rights reserved.
+    </div>
+
+  </footer>
+
+
+</body>
+</html>
