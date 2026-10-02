@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Rina Foods | Sales Dashboard</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f1e8;
+    color: #2d241d;
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+.login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        linear-gradient(rgba(35,25,18,.88), rgba(35,25,18,.88)),
+        url("assets/images/hero.jpg") center/cover;
+    padding: 20px;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    text-align: center;
+}
+
+.login-logo {
+    font-family: Georgia, serif;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.login-subtitle {
+    color: #777;
+    margin-bottom: 30px;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: #d8a62a;
+    color: #241a12;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.login-error {
+    color: #c0392b;
+    margin-top: 12px;
+    display: none;
+}
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard {
+    display: none;
+    min-height: 100vh;
+}
+
+header {
+    background: #241a12;
+    color: white;
+    padding: 18px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    font-family: Georgia, serif;
+    font-size: 25px;
+}
+
+.sales-label {
+    font-size: 13px;
+    color: #e5c76d;
+    margin-top: 3px;
+}
+
+.logout {
+    border: 1px solid rgba(255,255,255,.3);
+    background: transparent;
+    color: white;
+    padding: 9px 15px;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.container {
+    width: min(1400px, 92%);
+    margin: 30px auto;
+}
+
+.page-title {
+    margin-bottom: 25px;
+}
+
+.page-title h1 {
+    font-family: Georgia, serif;
+    font-size: 38px;
+    margin-bottom: 7px;
+}
+
+.page-title p {
+    color: #777;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: white;
+    padding: 24px;
+    border-radius: 18px;
+    border: 1px solid #e6ded2;
+}
+
+.stat-label {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.stat-value {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* =========================
+   SHOP DETAILS
+========================= */
+
+.panel {
+    background: white;
+    border: 1px solid #e6ded2;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.panel h2 {
+    font-family: Georgia, serif;
+    margin-bottom: 20px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.field label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.field input,
+.field select,
+.field textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 15px;
+    background: white;
+}
+
+.field textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+/* =========================
+   PRODUCTS
+========================= */
+
+.product-tools {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.product-search {
+    flex: 1;
+    padding: 14px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.product-count {
+    background: #f5f1e8;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.product-row {
+    border: 1px solid #e6ded2;
+    border-radius: 13px;
+    padding: 13px;
+    display: grid;
+    grid-template-columns: 1fr 90px 110px;
+    gap: 10px;
+    align-items: center;
+}
+
+.product-name {
+    font-weight: 600;
+}
+
+.product-row input,
+.product-row select {
+    width: 100%;
+    padding: 9px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.product-row input {
+    text-align: center;
+}
+
+/* =========================
+   ORDER SUMMARY
+========================= */
+
+.order-summary {
+    margin-top: 25px;
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-table th,
+.order-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+.remove-btn {
+    border: none;
+    background: #fce7e5;
+    color: #c0392b;
+    padding: 7px 10px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.primary-btn,
+.secondary-btn,
+.danger-btn {
+    border: none;
+    padding: 14px 20px;
+    border-radius: 11px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.primary-btn {
+    background: #d8a62a;
+    color: #241a12;
+}
+
+.secondary-btn {
+    background: #241a12;
+    color: white;
+}
+
+.danger-btn {
+    background: #fce7e5;
+    color: #c0392b;
+}
+
+/* =========================
+   ORDERS
+========================= */
+
+.saved-order {
+    border: 1px solid #e6ded2;
+    padding: 18px;
+    border-radius: 14px;
+    margin-bottom: 12px;
+    background: #fff;
+}
+
+.saved-order-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.saved-order small {
+    color: #777;
+}
+
+.order-products {
+    margin-top: 12px;
+    color: #555;
+    line-height: 1.7;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .product-list {
+        grid-template-columns: 1fr;
+    }
+
+    .product-row {
+        grid-template-columns: 1fr 80px 100px;
+    }
+
+    header {
+        padding: 15px 4%;
+    }
+
+    .page-title h1 {
+        font-size: 30px;
+    }
+
+}
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+
+<!-- =========================
+     LOGIN SCREEN
+========================= -->
+
+<div class="login-screen" id="loginScreen">
+
+    <div class="login-box">
+
+        <div class="login-logo">
+            Rina Foods
+        </div>
+
+        <div class="login-subtitle">
+            Salesman Portal
+        </div>
+
+        <input
+            type="password"
+            id="salesPin"
+            placeholder="Enter salesman PIN"
+        >
+
+        <button onclick="login()">
+            Enter Sales Dashboard
+        </button>
+
+        <div class="login-error" id="loginError">
+            Incorrect PIN
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     DASHBOARD
+========================= -->
+
+<div class="dashboard" id="dashboard">
+
+<header>
+
+    <div>
+        <div class="logo">
+            Rina Foods
+        </div>
+
+        <div class="sales-label">
+            Salesman Order System
+        </div>
+    </div>
+
+    <button class="logout" onclick="logout()">
+        Logout
+    </button>
+
+</header>
+
+
+<main class="container">
+
+
+    <div class="page-title">
+
+        <h1>Sales Dashboard</h1>
+
+        <p>
+            Collect wholesale orders from shops and manage your daily sales.
+        </p>
+
+    </div>
+
+
+    <!-- =========================
+         STATS
+    ========================= -->
+
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                Orders Today
+            </div>
+
+            <div
+                class="stat-value"
+                id="ordersToday"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                Shops Today
+            </div>
+
+            <div
+                class="stat-value"
+                id="shopsToday"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-label">
+                Products Ordered
+            </div>
+
+            <div
+                class="stat-value"
+                id="productsToday"
+            >
+                0
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         SHOP DETAILS
+    ========================= -->
+
+    <div class="panel">
+
+        <h2>
+            Shop Details
+        </h2>
+
+        <div class="form-grid">
+
+            <div class="field">
+
+                <label>
+                    Shop / Business Name
+                </label>
+
+                <input
+                    id="shopName"
+                    type="text"
+                    placeholder="Example: ABC Bakery"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Shopkeeper Name
+                </label>
+
+                <input
+                    id="shopkeeper"
+                    type="text"
+                    placeholder="Customer name"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Phone Number
+                </label>
+
+                <input
+                    id="phone"
+                    type="tel"
+                    placeholder="Phone number"
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Location
+                </label>
+
+                <input
+                    id="location"
+                    type="text"
+                    placeholder="Shop location"
+                >
+
+            </div>
+
+
+            <div class="field full-width">
+
+                <label>
+                    Notes
+                </label>
+
+                <textarea
+                    id="notes"
+                    placeholder="Delivery instructions or other notes"
+                ></textarea>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         PRODUCTS
+    ========================= -->
+
+    <div class="panel">
+
+        <h2>
+            Add Products
+        </h2>
+
+
+        <div class="product-tools">
+
+            <input
+                class="product-search"
+                id="productSearch"
+                type="text"
+                placeholder="Search products..."
+                oninput="filterProducts()"
+            >
+
+            <div class="product-count">
+                <span id="selectedCount">0</span>
+                selected
+            </div>
+
+        </div>
+
+
+        <div
+            class="product-list"
+            id="productList"
+        ></div>
+
+
+    </div>
+
+
+    <!-- =========================
+         CURRENT ORDER
+    ========================= -->
+
+    <div class="panel">
+
+        <h2>
+            Current Order
+        </h2>
+
+
+        <div id="emptyOrder">
+
+            <p style="color:#777;">
+                No products added yet.
+            </p>
+
+        </div>
+
+
+        <div
+            id="orderTableContainer"
+            style="display:none;"
+        >
+
+            <table class="order-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Product
+                        </th>
+
+                        <th>
+                            Quantity
+                        </th>
+
+                        <th>
+                            Unit
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="orderTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div class="actions">
+
+            <button
+                class="primary-btn"
+                onclick="saveOrder()"
+            >
+                Save Order
+            </button>
+
+            <button
+                class="danger-btn"
+                onclick="clearOrder()"
+            >
+                Clear Order
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         REPORT
+    ========================= -->
+
+    <div class="panel">
+
+        <h2>
+            Saved Orders
+        </h2>
+
+        <div id="savedOrders">
+
+            <p style="color:#777;">
+                No orders saved yet.
+            </p>
+
+        </div>
+
+    </div>
+
+
+</main>
+
+</div>
+
+
+<script>
+const SUPABASE_URL = "https://uexsyepgywjnynbmrqfh.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_z4DX5XuGRRis0RnFRaGWXw_aymMVYcM";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+
+/* =========================
+   SALES PIN
+========================= */
+
+const SALES_PIN = "1234";
+
+
+/* =========================
+   PRODUCTS
+========================= */
+
+const products = [
+
+"Laddoo",
+"Mixture",
+"Madakku",
+"Ring",
+"Nurukku",
+"Halwa",
+"Jalebi",
+"Mysore Pak",
+"Gulab Jamun",
+"Unniyappam",
+"Neyyappam",
+"Achappam",
+"Kuzhalappam",
+"Murukku",
+"Avalose Unda",
+"Ariyunda",
+"Churuttu",
+"Kozhukkatta",
+"Sukhiyan",
+"Bonda",
+"Pakoda",
+"Banana Chips",
+"Sharkara Varatti",
+"Boondi",
+"Sev",
+"Kara Boondi",
+"Then Mittai",
+"Coconut Burfi",
+"Milk Peda",
+"Khaja",
+"Badusha",
+"Laddu",
+"Soan Papdi",
+"Adhirasam",
+"Rava Laddu",
+"Besan Laddu",
+"Modakam",
+"Kaju Katli",
+"Rasgulla",
+"Rasmalai",
+"Peda",
+"Carrot Halwa",
+"Black Halwa",
+"White Halwa",
+"Banana Halwa",
+"Dates Halwa",
+"Chakka Varattiyathu",
+"Unnakkaya",
+"Vattayappam",
+"Kalathappam",
+"Pathiri",
+"Neypathal",
+"Sweet Boli",
+"Palada",
+"Ada",
+"Mutta Mala",
+"Chatti Pathiri",
+"Kozhi Ada",
+"Meat Cutlet",
+"Vegetable Cutlet",
+"Egg Puffs",
+"Chicken Puffs",
+"Vegetable Puffs",
+"Cream Bun",
+"Jam Bun",
+"Tea Cake",
+"Plum Cake",
+"Butter Cake",
+"Sponge Cake",
+"Black Forest Cake",
+"Pineapple Cake",
+"Bread",
+"Bun",
+"Rusk",
+"Toast",
+"Cookies",
+"Coconut Cookies",
+"Butter Cookies",
+"Cream Roll",
+"Veg Roll",
+"Chicken Roll",
+"Chicken Samosa",
+"Vegetable Samosa",
+"Onion Samosa",
+"Banana Fry",
+"Pazham Pori",
+"Samosa",
+"Vada",
+"Parippu Vada",
+"Uzhunnu Vada",
+"Bonda",
+"Bajji",
+"Mulaku Bajji",
+"Onion Bajji",
+"t paffs"
+
+];
+
+
+/* =========================
+   CURRENT ORDER
+========================= */
+
+let currentOrder = [];
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function login() {
+
+    const pin =
+        document.getElementById("salesPin").value;
+
+    if (pin === SALES_PIN) {
+
+        document.getElementById("loginScreen").style.display = "none";
+
+        document.getElementById("dashboard").style.display = "block";
+
+        renderProducts();
+
+        updateReports();
+
+    } else {
+
+        document.getElementById("loginError").style.display = "block";
+
+    }
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logout() {
+
+    document.getElementById("dashboard").style.display = "none";
+
+    document.getElementById("loginScreen").style.display = "flex";
+
+    document.getElementById("salesPin").value = "";
+
+}
+
+
+/* =========================
+   RENDER PRODUCTS
+========================= */
+
+function renderProducts(filter = "") {
+
+    const container =
+        document.getElementById("productList");
+
+    container.innerHTML = "";
+
+    products
+        .filter(product =>
+            product.toLowerCase().includes(filter.toLowerCase())
+        )
+        .forEach(product => {
+
+            const existing =
+                currentOrder.find(item => item.product === product);
+
+            const quantity =
+                existing ? existing.quantity : "";
+
+            const unit =
+                existing ? existing.unit : "kg";
+
+
+            const row =
+                document.createElement("div");
+
+            row.className = "product-row";
+
+            row.innerHTML = `
+
+                <div class="product-name">
+                    ${product}
+                </div>
+
+                <input
+                    type="number"
+                    min="0"
+                    placeholder="Qty"
+                    value="${quantity}"
+                    id="qty-${safeId(product)}"
+                    onchange="updateProduct('${escapeProduct(product)}')"
+                >
+
+                <select
+                    id="unit-${safeId(product)}"
+                    onchange="updateProduct('${escapeProduct(product)}')"
+                >
+
+                    <option value="kg" ${unit === "kg" ? "selected" : ""}>
+                        kg
+                    </option>
+
+                    <option value="pieces" ${unit === "pieces" ? "selected" : ""}>
+                        Pieces
+                    </option>
+
+                    <option value="box" ${unit === "box" ? "selected" : ""}>
+                        Box
+                    </option>
+
+                    <option value="packet" ${unit === "packet" ? "selected" : ""}>
+                        Packet
+                    </option>
+
+                </select>
+
+            `;
+
+            container.appendChild(row);
+
+        });
+
+    updateSelectedCount();
+
+}
+
+
+/* =========================
+   UPDATE PRODUCT
+========================= */
+
+function updateProduct(product) {
+
+    const quantityInput =
+        document.getElementById(
+            "qty-" + safeId(product)
+        );
+
+    const unitInput =
+        document.getElementById(
+            "unit-" + safeId(product)
+        );
+
+    const quantity =
+        Number(quantityInput.value);
+
+    const unit =
+        unitInput.value;
+
+
+    const existingIndex =
+        currentOrder.findIndex(
+            item => item.product === product
+        );
+
+
+    if (quantity > 0) {
+
+        const item = {
+            product: product,
+            quantity: quantity,
+            unit: unit
+        };
+
+
+        if (existingIndex >= 0) {
+
+            currentOrder[existingIndex] = item;
+
+        } else {
+
+            currentOrder.push(item);
+
+        }
+
+    } else {
+
+        if (existingIndex >= 0) {
+
+            currentOrder.splice(existingIndex, 1);
+
+        }
+
+    }
+
+
+    renderOrder();
+
+}
+
+
+/* =========================
+   RENDER CURRENT ORDER
+========================= */
+
+function renderOrder() {
+
+    const emptyOrder =
+        document.getElementById("emptyOrder");
+
+    const tableContainer =
+        document.getElementById("orderTableContainer");
+
+    const table =
+        document.getElementById("orderTable");
+
+
+    table.innerHTML = "";
+
+
+    if (currentOrder.length === 0) {
+
+        emptyOrder.style.display = "block";
+
+        tableContainer.style.display = "none";
+
+    } else {
+
+        emptyOrder.style.display = "none";
+
+        tableContainer.style.display = "block";
+
+
+        currentOrder.forEach((item, index) => {
+
+            const row =
+                document.createElement("tr");
+
+            row.innerHTML = `
+
+                <td>
+                    ${item.product}
+                </td>
+
+                <td>
+                    ${item.quantity}
+                </td>
+
+                <td>
+                    ${item.unit}
+                </td>
+
+                <td>
+
+                    <button
+                        class="remove-btn"
+                        onclick="removeProduct(${index})"
+                    >
+                        Remove
+                    </button>
+
+                </td>
+
+            `;
+
+            table.appendChild(row);
+
+        });
+
+    }
+
+
+    updateSelectedCount();
+
+}
+
+
+/* =========================
+   REMOVE PRODUCT
+========================= */
+
+function removeProduct(index) {
+
+    currentOrder.splice(index, 1);
+
+    renderProducts(
+        document.getElementById("productSearch").value
+    );
+
+    renderOrder();
+
+}
+
+
+/* =========================
+   CLEAR ORDER
+========================= */
+
+function clearOrder() {
+
+    if (currentOrder.length === 0) return;
+
+    if (
+        confirm("Clear the current order?")
+    ) {
+
+        currentOrder = [];
+
+        renderProducts();
+
+        renderOrder();
+
+    }
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function filterProducts() {
+
+    const search =
+        document.getElementById("productSearch").value;
+
+    renderProducts(search);
+
+}
+
+
+/* =========================
+   SELECTED COUNT
+========================= */
+
+function updateSelectedCount() {
+
+    document.getElementById("selectedCount").textContent =
+        currentOrder.length;
+
+}
+
+
+/* =========================
+   SAVE ORDER
+========================= */
+
+function saveOrder() {
+
+    const shopName =
+        document.getElementById("shopName").value.trim();
+
+    const shopkeeper =
+        document.getElementById("shopkeeper").value.trim();
+
+    const phone =
+        document.getElementById("phone").value.trim();
+
+    const location =
+        document.getElementById("location").value.trim();
+
+    const notes =
+        document.getElementById("notes").value.trim();
+
+
+    if (!shopName) {
+
+        alert("Please enter the shop name.");
+
+        return;
+
+    }
+
+
+    if (currentOrder.length === 0) {
+
+        alert("Please add at least one product.");
+
+        return;
+
+    }
+
+
+    const order = {
+
+        id: Date.now(),
+
+        date: new Date().toLocaleString(),
+
+        shopName: shopName,
+
+        shopkeeper: shopkeeper,
+
+        phone: phone,
+
+        location: location,
+
+        notes: notes,
+
+        products: [...currentOrder]
+
+    };
+
+
+    const savedOrders =
+        JSON.parse(
+            localStorage.getItem("rinaOrders") || "[]"
+        );
+
+
+    savedOrders.unshift(order);
+
+
+    localStorage.setItem(
+        "rinaOrders",
+        JSON.stringify(savedOrders)
+    );
+
+
+    alert("Order saved successfully!");
+
+
+    currentOrder = [];
+
+
+    document.getElementById("shopName").value = "";
+    document.getElementById("shopkeeper").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("location").value = "";
+    document.getElementById("notes").value = "";
+
+
+    renderProducts();
+
+    renderOrder();
+
+    updateReports();
+
+}
+
+
+/* =========================
+   REPORTS
+========================= */
+
+function updateReports() {
+
+    const orders =
+        JSON.parse(
+            localStorage.getItem("rinaOrders") || "[]"
+        );
+
+
+    const today =
+        new Date().toLocaleDateString();
+
+
+    const todayOrders =
+        orders.filter(order =>
+            new Date(order.id).toLocaleDateString() === today
+        );
+
+
+    document.getElementById("ordersToday").textContent =
+        todayOrders.length;
+
+
+    const shops =
+        new Set(
+            todayOrders.map(order => order.shopName)
+        );
+
+
+    document.getElementById("shopsToday").textContent =
+        shops.size;
+
+
+    let productCount = 0;
+
+
+    todayOrders.forEach(order => {
+
+        productCount += order.products.length;
+
+    });
+
+
+    document.getElementById("productsToday").textContent =
+        productCount;
+
+
+    renderSavedOrders(orders);
+
+}
+
+
+/* =========================
+   SAVED ORDERS
+========================= */
+
+function renderSavedOrders(orders) {
+
+    const container =
+        document.getElementById("savedOrders");
+
+
+    if (orders.length === 0) {
+
+        container.innerHTML =
+            `<p style="color:#777;">No orders saved yet.</p>`;
+
+        return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    orders.slice(0, 20).forEach(order => {
+
+        const box =
+            document.createElement("div");
+
+        box.className = "saved-order";
+
+
+        const productsText =
+            order.products
+                .map(item =>
+                    `${item.product} — ${item.quantity} ${item.unit}`
+                )
+                .join("<br>");
+
+
+        box.innerHTML = `
+
+            <div class="saved-order-top">
+
+                <strong>
+                    ${order.shopName}
+                </strong>
+
+                <small>
+                    ${order.date}
+                </small>
+
+            </div>
+
+            <small>
+                ${order.shopkeeper || ""}
+                ${order.phone ? " • " + order.phone : ""}
+            </small>
+
+            <div class="order-products">
+
+                ${productsText}
+
+            </div>
+
+        `;
+
+
+        container.appendChild(box);
+
+    });
+
+}
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function safeId(text) {
+
+    return text
+        .replace(/[^a-zA-Z0-9]/g, "-");
+
+}
+
+
+function escapeProduct(text) {
+
+    return text
+        .replace(/\\/g, "\\\\")
+        .replace(/'/g, "\\'");
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+renderProducts();
+
+</script>
+
+</body>
+</html>
